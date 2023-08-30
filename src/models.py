@@ -33,6 +33,31 @@ class Weapons(Base):
     __tablename__ = "weapons"
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
+    energy = Column(String(200), nullable=False)
+
+class Fav_Char (Base):
+    __tablename__ = "fav_char"
+    id = Column(Integer, primary_key=True)
+    user_id  = Column(Integer, ForeignKey('users.id'))
+    user = relationship(Users)
+    character_id = Column(Integer, ForeignKey('characters.id'))
+    character = relationship(Characters)
+
+class Fav_Planets (Base):
+    __tablename__ = "fav_planets"
+    id = Column(Integer, primary_key=True)
+    user_id  = Column(Integer, ForeignKey('user.id'))
+    user = relationship(Users)
+    planet_id = Column(Integer, ForeignKey('planets.id'))
+    planet = relationship(Planets)
+
+class Fav_Weapons (Base):
+    __tablename__ = "fav_weapons"
+    id = Column(Integer, primary_key=True)
+    user_id  = Column(Integer, ForeignKey('users.id'))
+    user = relationship(Users)
+    weapon_id = Column(Integer, ForeignKey('weapons.id'))
+    weapon = relationship(Weapons)
     
 
     def to_dict(self):
